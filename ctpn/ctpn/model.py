@@ -16,7 +16,9 @@ from lib.fast_rcnn.nms_wrapper import nms
 def load_tf_model():
     cfg.TEST.HAS_RPN = True  # Use RPN for proposals
     # init session
-    config = tf.ConfigProto(allow_soft_placement=True)
+    #config = tf.ConfigProto(allow_soft_placement=True)
+    config = tf.ConfigProto()
+    config.gpu_options.per_process_gpu_memory_fraction = 0.4
     sess = tf.Session(config=config)
     # load network
     net = get_network("VGGnet_test")
